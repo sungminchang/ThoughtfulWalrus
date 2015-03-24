@@ -106,7 +106,7 @@ var sendMessage = function(latitude, longitude, googleMapsLink, recipientPhoneNu
       });
 
       return promise;
-}
+};
 
 //  creates twilio response callback. want to bind 'i' so
 //  asynchronous responses correspond with the emergency contact

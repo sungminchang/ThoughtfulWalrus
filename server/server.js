@@ -1,8 +1,10 @@
 var express = require('express');
 var db = require('./db/config.js');
 
+// intantiate express application
 var app = express();
 var mongoose = require('mongoose');
+// grab the user model
 var User = require('./db/models/user.js');
 
 var port = process.env.PORT || 5000;

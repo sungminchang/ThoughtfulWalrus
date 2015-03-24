@@ -204,8 +204,8 @@ module.exports.getContacts = function(req, res, next) {
 
 module.exports.checkAuth =  function (req, res, next) {
      // checking to see if the user is authenticated
-     // grab the token in the header is any
-     // then decode the token, which we end up being the user object
+     // grab the token in the header if there is any
+     // then decode the token, which we end up using as the user object
      // check to see if that user exists in the database
      var token = req.headers['x-access-token'];
      var findOne = Q.nbind(User.findOne, User);
