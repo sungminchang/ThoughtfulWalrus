@@ -4,15 +4,15 @@
     .module('distress')
     .controller('HomeCtrl', HomeCtrl);
 
-  HomeCtrl.$inject = ['$scope', 'DistressButton', 'DataFetcher', 'GeoLocation', 'Auth'];
+  HomeCtrl.$inject = ['$scope', 'DistressButton', 'DataFetcher', 'GeoLocation', 'Auth', 'ContactEditor'];
 
-  function HomeCtrl($scope, DistressButton, DataFetcher, GeoLocation, Auth){
+  function HomeCtrl($scope, DistressButton, DataFetcher, GeoLocation, Auth, ContactEditor){
     $scope.emergencyNumber = DataFetcher.savedNumber || '';
     $scope.locationData = {};
-    $scope.isLoggedIn = Auth.isAuthenticated();    
+    $scope.isLoggedIn = Auth.isAuthenticated();  
     // Display loading spinner and hide home content while ajax request is processing
-    $scope.spinner = true;
-    $scope.homeContent   = false;
+    $scope.spinner = false;   //disable spinner for every loading
+    $scope.homeContent = true;  //show content even when ajax call still working
 
     //assumes that getLocation has already been run.
     //passes location and callback to DataFetcher method, sets emergencyNumber on the DOM
@@ -84,6 +84,15 @@
       var location = {longitude: GeoLocation.longitude, latitude: GeoLocation.latitude};
       DataFetcher.getPoliceMap(location);
     };
+    // Check user's contact and hide distress button
+    // if the user has no contact to send SMS
+    $scope.checkContacts = function(){
+      var contactsFromDB = ContactEditor.getContacts().then(function(result){
+        $scope.hasContacts = result.length > 0;
+        $scope.$apply();
+      });
+    };
+    $scope.checkContacts();
 
     // initializes location and emergency number
     $scope.init = function(){
