@@ -89,7 +89,7 @@
     $scope.checkContacts = function(){
       var contactsFromDB = ContactEditor.getContacts().then(function(result){
         $scope.hasContacts = result.length > 0;
-        $scope.$apply();
+        // $scope.$apply();
       });
     };
     $scope.checkContacts();
