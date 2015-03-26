@@ -1,8 +1,8 @@
 var expect = require('chai').expect;
 var request = require('request');
 
-var db = require('../server/db/config');
-var User = require('../server/db/models/user');
+var db = require('../../server/db/config');
+var User = require('../../server/db/models/user');
 
 /// User Actions - 1001 
 /// These test cases test User actions. These are things a user can perform such as

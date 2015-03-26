@@ -9,10 +9,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-mocha');
-  grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-mocha');      // for client tests
+  grunt.loadNpmTasks('grunt-mocha-test'); // for server tests
+  // grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
-  grunt.loadNpmTasks('grunt-shell');
+  // grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-shell-spawn');
 
   // in what order should the files be concatenated
   var clientIncludeOrder = require('./include.conf.js');
@@ -111,6 +113,15 @@ module.exports = function(grunt) {
       },
     },
 
+    // server test config (not client)
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec'
+        },
+        src: ['test/server/*.js']
+      }
+    },
 
     // create a watch task for tracking
     // any changes to the following files
@@ -146,7 +157,16 @@ module.exports = function(grunt) {
 
     shell: {
       serverTest: {
-          command: 'node server/server.js & ./node_modules/.bin/mocha --bail test/ServerSpec.js; pkill -n node;'
+        command: 'node server/server.js & ./node_modules/.bin/mocha --bail test/server/ServerSpec.js; pkill -n node;'
+      },
+      server: {
+        command: 'node server/server.js',
+        options: {
+          async: true
+        }
+      },
+      sleep: {
+        command: 'sleep 2'
       },
       prodServer: {
         command: 'git push azure master',
@@ -157,6 +177,7 @@ module.exports = function(grunt) {
         }
       }
     },
+
   });
 
   // Deployment task.
@@ -167,6 +188,13 @@ module.exports = function(grunt) {
 
   // Run client tests once
   grunt.registerTask('testClient', [ 'karma:single' ]);
+
+  grunt.registerTask('testServer', [
+    'shell:server',
+    'shell:sleep', // This is a hack. It gives the server time to spin up before the tests run.
+    'mochaTest', 
+    'shell:server:kill'
+  ]);
 
   // Run all tests once
   grunt.registerTask('test', [ 'testClient', 'shell:serverTest']);
