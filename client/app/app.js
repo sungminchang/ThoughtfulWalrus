@@ -1,6 +1,6 @@
 (function(){
 
-  var app = angular.module('distress', ['ui.router']);
+  var app = angular.module('distress', ['ui.router', 'internationalPhoneNumber']); //Inject internationalPhoneNumber dependency
 
   app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
       $urlRouterProvider.otherwise('/');

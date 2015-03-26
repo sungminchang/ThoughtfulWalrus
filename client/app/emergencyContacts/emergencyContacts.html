@@ -10,10 +10,17 @@
       <input class="form-control" type="text" style="color: black;" name="name" ng-model="contact.name" placeholder='Contact Name' ng-class="{'error': contactForm.$invalid && contactForm.$dirty}" required>
     </div>
 
-    <div class="form-group">
+<!--<div class="form-group">
       <label for="phone">Phone number</label>
       <input class="form-control" type="tel" style="color: black;" name="phone" ng-model="contact.phone" placeholder='Phone Number (ex: 1234567890)' maxlength="15"  pattern="[0-9]{10,15}" required>
+    </div> -->
+    
+    <!-- The input also has checking function, so remove the length and pattern check -->
+    <div class="form-group">
+      <label for="phone">Phone number</label>
+      <input class="form-control" type="tel" style="color: black;" international-phone-number name="phone" ng-model="contact.phone" required>
     </div>
+
     <button id="contact-submit-btn" class="btn btn-default" type="submit" value="Submit" ng-click="addContact()" ng-disabled='contactForm.$invalid'>Add Contact</button>
   </form>
 
