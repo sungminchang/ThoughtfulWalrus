@@ -39,10 +39,21 @@
     $scope.getLocation = function(){
       var self = this;
 
-      GeoLocation.getLocation(function(lat, lon){
-        self.$apply(function(){
-          self.locationData = {latitude: lat, longitude: lon};
+      GeoLocation.getCurrentPosition(function (position) {
+        self.$apply(function() { 
+          self.locationData = {latitude: position.coords.latitude,
+                             longitude: position.coords.longitude};
         });
+
+        alert('Latitude: '              + position.coords.latitude          + '\n' +
+              'Longitude: '             + position.coords.longitude         + '\n' +
+              'Altitude: '              + position.coords.altitude          + '\n' +
+              'Accuracy: '              + position.coords.accuracy          + '\n' +
+              'Altitude Accuracy: '     + position.coords.altitudeAccuracy  + '\n' +
+              'Heading: '               + position.coords.heading           + '\n' +
+              'Speed: '                 + position.coords.speed             + '\n' +
+              'Timestamp: '             + position.timestamp                + '\n');
+      
         //once we get location data, we get emergency number
         self.getEmergencyNumber();
       });

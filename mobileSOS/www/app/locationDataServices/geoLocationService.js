@@ -4,41 +4,34 @@
     .module('distress')
     .factory('GeoLocation', GeoLocation);
 
-  GeoLocation.$inject = [];
+  GeoLocation.$inject = ['$rootScope', 'cordovaReady'];
 
-  function GeoLocation(){
+  function GeoLocation($rootScope, cordovaReady){
 
-    var instance = {
-      latitude: 0,
-      longitude: 0,
-      mapLink: '',
-      getLocation: getLocation,
-      storeLocation: storeLocation
-    };
+  return {
+      getCurrentPosition: function (onSuccess, onError, options) {
+        navigator.geolocation.getCurrentPosition(function () {
+          var that = this,
+            args = arguments;
 
-    return instance;
+          if (onSuccess) {
+            $rootScope.$apply(function () {
+              onSuccess.apply(that, args);
+            });
+          }
+        }, function () {
+          var that = this,
+            args = arguments;
 
-    ///// IMPLEMENTATION /////
-
-    /// Description: Retrieves the geolocation of browser, if supported.
-    /// returns: Nothing.
-    function getLocation(cb) {
-      if (window.navigator && window.navigator.geolocation) {
-         window.navigator.geolocation.getCurrentPosition(this.storeLocation.bind(this, cb));
-         return true;
-      } else {
-        console.log('Error: Geolocation not supported');
-        return false;
+          if (onError) {
+            $rootScope.$apply(function () {
+              onError.apply(that, args);
+            });
+          }
+        },
+        options);
       }
-    }
+    };
+  };
 
-    /// Description: Stores longitude, latitude, and google maps link to the window. takes callback
-    /// returns: Nothing
-    function storeLocation(cb, position) {
-      this.latitude = position.coords.latitude;
-      this.longitude = position.coords.longitude;
-      this.mapLink = 'http://maps.google.com/?q=' + this.latitude + ',' + this.longitude;
-      cb(this.latitude, this.longitude);
-    }
-  }
 })();
