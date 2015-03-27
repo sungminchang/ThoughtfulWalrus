@@ -18,6 +18,25 @@
 
     // Will add a contact into the users emergency contacts.
     // Then it syncs with the database.
+    $scope.addPhoneContact = function(){
+      navigator.contacts.pickContact(function(contact){
+        var person = {name: contact.name.formatted, phone: contact.phoneNumbers[0].value};
+
+        ContactEditor.addContact(person).then(function(response){
+          if(response.status === 200){
+            $scope.getContacts();
+            $scope.contact.name = '';
+            $scope.contact.phone = '';
+            $scope.contactForm.$setPristine();
+          }
+        });
+      },function(err){
+        alert('Error: ' + err);
+      });
+    };
+
+    // Will add a contact into the users emergency contacts.
+    // Then it syncs with the database.
     $scope.addContact = function(){
       var person = {name: $scope.contact.name, phone: $scope.contact.phone};
 
@@ -26,6 +45,7 @@
           $scope.getContacts();
           $scope.contact.name = '';
           $scope.contact.phone = '';
+          $scope.contactForm.$setPristine();
         }
       });
     };
