@@ -11,22 +11,6 @@
     $scope.addContactForm = false;
     $scope.addContactBtn = true;
 
-    $scope.addContactFromPhone = function () {
-      $scope.addContactForm = false;
-      $scope.addContactBtn = false;
-      navigator.contacts.pickContact(function(contact){
-        alert(JSON.stringify(contact.name.formatted));
-        alert(JSON.stringify(contact));
-        var person = {name: contact.name.formatted, phone: contact.phoneNumber[0].value};
-
-        ContactEditor.addContact(person).then(function(response){
-          if(response.status === 200){
-            $scope.getContacts();
-          }
-        });
-      });
-    };
-
     $scope.showAddContactForm = function () {
       $scope.addContactForm = true;
       $scope.addContactBtn = false;
@@ -42,6 +26,7 @@
           $scope.getContacts();
           $scope.contact.name = '';
           $scope.contact.phone = '';
+          $scope.contactForm.$setPristine();
         }
       });
     };
