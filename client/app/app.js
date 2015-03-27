@@ -1,6 +1,6 @@
 (function(){
 
-  var app = angular.module('distress', ['ui.router']);
+  var app = angular.module('distress', ['ui.router', 'internationalPhoneNumber']); //Inject internationalPhoneNumber dependency
 
   app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
       $urlRouterProvider.otherwise('/');
@@ -55,7 +55,9 @@
         event.preventDefault();
       }
     });
-  });
+  })
+  .constant('baseURL', 'http://127.0.0.1:5000');
+
 
   console.log('app loaded successfully');
 })();

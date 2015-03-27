@@ -4943,3 +4943,26 @@ body .btn {
   border-bottom: 1px solid #fff;
   padding: 10px;
 }
+
+/* flag image for each country */
+.iti-flag {background-image: url("./client/lib/intl-tel-input/img/flags.png");}
+
+/* Change color so the country name is easier to be seem in the input*/
+.country-name{
+  color:black;
+}
+
+/* Add following three for invalid input reminder in the emergency form*/
+.ng-invalid.ng-dirty{
+ border-color: red;
+}
+.ng-valid.ng-dirty{
+ border-color: green;
+}
+
+#errorReminds{
+  color:white;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857;
+}

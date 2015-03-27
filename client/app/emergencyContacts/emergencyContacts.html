@@ -8,11 +8,23 @@
     <div class="form-group">
       <label for="name">Contact name</label>
       <input class="form-control" type="text" style="color: black;" name="name" ng-model="contact.name" placeholder='Contact Name' ng-class="{'error': contactForm.$invalid && contactForm.$dirty}" required>
+      <span style="color:black" ng-show="contactForm.name.$dirty && contactForm.name.$invalid" >
+      <span ng-show="contactForm.name.$invalid && contactForm.name.$dirty" id="errorReminds">Contact Name is required.</span>
+      </span>
     </div>
 
+<!--<div class="form-group">
+      <label for="phone">Phone number</label>
+      <input class="form-control" type="tel" style="color: black;" name="phone" ng-model="contact.phone" placeholder='Phone Number (ex: 1234567890)' maxlength="15"  pattern="[0-9]{10,15}" required>
+    </div> -->
+    
+    <!-- The input also has checking function, so remove the length and pattern check -->
     <div class="form-group">
       <label for="phone">Phone number</label>
-      <input class="form-control" type="tel" style="color: black;" name="phone" ng-model="contact.phone" placeholder='Phone Number (example: 1112223333)' maxlength="10"  pattern="[0-9]{10}" required>
+      <input class="form-control" type="tel" style="color: black;" international-phone-number name="phone" ng-model="contact.phone" required>
+      <span style="color:black" ng-show="contactForm.phone.$dirty && contactForm.phone.$invalid">
+      <span ng-show="contactForm.phone.$error.required" id="errorReminds">Number is not valid. </span>
+      </span>
     </div>
 
     <button id="contact-submit-btn" class="btn btn-default" type="submit" value="Submit" ng-click="addContact()" ng-disabled='contactForm.$invalid'>Add Contact</button>
@@ -25,7 +37,7 @@
       <div class='contactCard'>
         <form ng-if='person.editing' name='contactForm' novalidate>
           <input class="form-control" type="text" style="color: black;" name="name" ng-model="person.name" placeholder='Contact Name' ng-class="{'error': contactForm.$invalid && contactForm.$dirty}" required>
-          <input class="form-control" type="tel" style="color: black;" name="phone" ng-model="person.phone" placeholder='Phone Number' maxlength="10"  pattern="[0-9]{10}" required>
+          <input class="form-control" type="tel" style="color: black;" international-phone-number name="phone" ng-model="contact.phone" required>
           <div class="contact-card-lastMsgStatus">Last distress: {{person.lastMsgStatus}}</div>
 
           <input class="btn btn-default" type="submit" value="Update" ng-click="updateContact(person); $event.stopPropagation()" ng-disabled='contactForm.$invalid'>
