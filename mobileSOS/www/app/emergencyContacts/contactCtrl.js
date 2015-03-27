@@ -20,12 +20,9 @@
     // Then it syncs with the database.
     $scope.addPhoneContact = function(){
       navigator.contacts.pickContact(function(contact){
-        alert('The following contact has been selected:' + JSON.stringify(contact));
         var person = {name: contact.name.formatted, phone: contact.phoneNumbers[0].value};
 
         ContactEditor.addContact(person).then(function(response){
-          alert('inside this guy!');
-          alert(response.status);
           if(response.status === 200){
             $scope.getContacts();
             $scope.contact.name = '';
