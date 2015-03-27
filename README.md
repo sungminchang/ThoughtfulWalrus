@@ -68,4 +68,4 @@ bower install
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+See [_CONTRIBUTING.md](_CONTRIBUTING.md) for contribution guidelines.
