@@ -11,8 +11,8 @@
     $scope.locationData = {};
     $scope.isLoggedIn = Auth.isAuthenticated();  
     // Display loading spinner and hide home content while ajax request is processing
-    $scope.spinner = false;   //disable spinner for every loading
-    $scope.homeContent = true;  //show content even when ajax call still working
+    $scope.spinner = true;   //false will disable spinner if you don't like it
+    $scope.homeContent = false;  //true will show content even when ajax call still working 
 
     //assumes that getLocation has already been run.
     //passes location and callback to DataFetcher method, sets emergencyNumber on the DOM

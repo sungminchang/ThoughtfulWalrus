@@ -5,9 +5,9 @@ Thoughtful Walrus
 
 ## Team
 
-  - __Product Owner__: Ben Rodigas
-  - __Scrum Master__: Michael Chen, Roger Thomasson
-  - __Development Team Members__: Kyle Owen, Roger Thomasson, Ben Rodigas, Michael Chen
+  - __Product Owner__: Brian Hsu
+  - __Scrum Master__: Andy Kitson
+  - __Development Team Members__: Ryan Atkinson, SungMin Chang, Andy Kitson, Brian Hsu
 
 ## Table of Contents
 
@@ -35,6 +35,13 @@ Thoughtful Walrus
 - morgan 1.5.1
 - twilio 1.11.1
 - q 1.2.0
+- grunt-contrib-clean 0.6.0
+- grunt-contrib-concat 0.5.1
+- grunt-contrib-copy 0.5.0
+- grunt-contrib-uglify 0.8.0 
+- grunt-contrib-jshint 0.11.0
+- grunt-contrib-sass 0.9.2 
+- grunt-shell 1.1.2 
 
 You will also need a twilio account. Only paid accounts can text any number. You will need to setup twilio credentials in /server/config/creds.js. Inside place something along the lines of:
 
@@ -61,4 +68,4 @@ bower install
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+See [_CONTRIBUTING.md](_CONTRIBUTING.md) for contribution guidelines.
