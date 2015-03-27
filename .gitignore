@@ -34,3 +34,7 @@ results/
 dist/
 
 server/config/creds.js
+
+mobileSOS/platforms/browser/*
+mobileSOS/platforms/ios/*
+
