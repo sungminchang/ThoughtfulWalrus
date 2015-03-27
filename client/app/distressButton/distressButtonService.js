@@ -4,9 +4,9 @@
     .module('distress')
     .factory('DistressButton', DistressButton);
 
-  DistressButton.$inject = ['$http', '$state'];
+  DistressButton.$inject = ['$http', '$state', 'baseURL'];
 
-  function DistressButton($http, $state){
+  function DistressButton($http, $state, baseURL){
 
     var instance = {
       sendDistress: sendDistress
@@ -22,7 +22,7 @@
     function sendDistress(latitude, longitude, mapLink, dateTime){
       return $http({
         method: 'POST',
-        url: '/sms/text/',
+        url: baseURL + '/sms/text/',
         data: {latitude: latitude, 
                longitude: longitude, 
                mapLink: mapLink, 

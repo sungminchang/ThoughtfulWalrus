@@ -4,9 +4,9 @@
     .module('distress')
     .factory('ContactEditor', ContactEditor);
 
-  ContactEditor.$inject = ['$http'];
+  ContactEditor.$inject = ['$http', 'baseURL'];
 
-  function ContactEditor($http){
+  function ContactEditor($http, baseURL){
 
     var instance = {
       addContact: addContact,
@@ -22,7 +22,7 @@
     function addContact(contact){
       return $http({
         method: 'POST',
-        url: '/user/addContact',
+        url: baseURL + '/user/addContact',
         data: {contact: contact}
       });
     }
@@ -30,7 +30,7 @@
     function updateContact(contact){
       return $http({
         method: 'POST',
-        url: '/user/updateContact',
+        url: baseURL + '/user/updateContact',
         data: {contact: contact}
       });
     }
@@ -38,7 +38,7 @@
     function deleteContact(contact){
       return $http({
         method: 'POST',
-        url: '/user/deleteContact',
+        url: baseURL + '/user/deleteContact',
         data: {contact: contact}
       });
     }
@@ -46,7 +46,7 @@
     function getContacts(){
       return $http({
         method: 'GET',
-        url: '/user/getContacts'
+        url: baseURL + '/user/getContacts'
       }).then(function (resp) {
         return resp.data;
       });

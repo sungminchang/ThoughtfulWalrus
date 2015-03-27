@@ -4,9 +4,9 @@
     .module('distress')
     .factory('Auth', Auth);
 
-  Auth.$inject = ['$http', '$location', '$window', '$state'];
+  Auth.$inject = ['$http', '$location', '$window', '$state', 'baseURL'];
 
-  function Auth($http, $location, $window, $state){
+  function Auth($http, $location, $window, $state, baseURL){
 
     var instance = {
       signIn: signIn,
@@ -24,7 +24,7 @@
     function signIn(user){
       return $http({
         method: 'POST',
-        url: '/user/signin',
+        url: baseURL + '/user/signin',
         data: user
       }).then(function(response){
         return response;        
@@ -36,7 +36,7 @@
     function signUp(user){
       return $http({
         method: 'POST',
-        url: '/user/signup',
+        url: baseURL + '/user/signup',
         data: user
       }).then(function(response){
         return response;
