@@ -19,6 +19,9 @@
     //using $apply (since it's asynchronous)
     //store it to Datafetcher.savedNumber so that it persists.
     $scope.getEmergencyNumber = function(){
+      alert('executing getEmergencyNumber');
+      alert('GeoLocation.longitude, GeoLocation.latitude: ', GeoLocation.longitude);
+
       var self = this,
           location = {longitude: GeoLocation.longitude, latitude: GeoLocation.latitude};
 
@@ -45,6 +48,8 @@
                              longitude: position.coords.longitude};
         });
 
+        // this.storeLocation.apply(this, [cb, position]);
+
         alert('Latitude: '              + position.coords.latitude          + '\n' +
               'Longitude: '             + position.coords.longitude         + '\n' +
               'Altitude: '              + position.coords.altitude          + '\n' +
@@ -55,8 +60,16 @@
               'Timestamp: '             + position.timestamp                + '\n');
       
         //once we get location data, we get emergency number
-        self.getEmergencyNumber();
-      });
+        alert('found emergency number');
+      },
+      function(lat, lon){
+              self.$apply(function(){
+                self.locationData = {latitude: lat, longitude: lon};
+              });
+              //once we get location data, we get emergency number
+              self.getEmergencyNumber();
+            }
+      );
     };
 
     $scope.sentMsgConf = false;

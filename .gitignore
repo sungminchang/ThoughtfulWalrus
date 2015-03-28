@@ -35,6 +35,6 @@ dist/
 
 server/config/creds.js
 
-mobileSOS/platforms/browser/*
-mobileSOS/platforms/ios/*
+mobileSOS/platforms/
+mobileSOS/plugins/
 
