@@ -9,4 +9,12 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+
+
+    <plugin name="Geolocation" value="CDVLocation" />
+
+    <feature name="Contacts">
+        <param name="ios-package" value="CDVContacts" />
+    </feature>
+
 </widget>
